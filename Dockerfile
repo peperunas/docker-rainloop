@@ -1,12 +1,13 @@
 FROM ahmet2mir/debian:wheezy
-MAINTAINER Ahmet Demir <ahmet2mir+github@gmail.com>
+
+MAINTAINER Giulio De Pasquale <me@krishath.it>
 
 ENV RELEASE wheezy
 ENV DEBIAN_FRONTEND noninteractive
 ENV SHELL /bin/bash
 
 # Curl extension
-RUN apt-get update && apt-get install -y nginx php5-fpm php5-curl php5-sqlite php5-json 
+RUN apt-get update && apt-get install -y nginx php5-fpm php5-curl php5-sqlite php5-json unzip
 
 # Adding files
 ADD . /docker
@@ -23,12 +24,14 @@ RUN mkdir -p /webapps/rainloop /webapps/logs/rainloop && \
 	ln -s /etc/nginx/sites-available/rainloop.conf /etc/nginx/sites-enabled/rainloop.conf && \
 	sed -i 's/;daemonize = yes/daemonize = no/g' /etc/php5/fpm/php-fpm.conf
 
-# "Configure services"
+
+## "Configure services"
 # Based on https://github.com/mingfang/docker-salt
+RUN mkdir /etc/service
 RUN for dir in /docker/services/*;\
     do echo $dir; chmod +x $dir/run $dir/log/run;\
     ln -sf $dir /etc/service/; done
 
+CMD /etc/service/nginx/run && /etc/service/php5-fpm/run
 # Expose services
-EXPOSE 22 80
-
+EXPOSE 443 
