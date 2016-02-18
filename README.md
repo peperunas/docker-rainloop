@@ -14,9 +14,26 @@ Open your browser and visit
 	http://127.0.0.1:443
 
 SSL
------------
+---
 Mount your host folder containing your cert && key to `/etc/ssl`.
 Name (or link) them as `cert.key` and `cert.pem`.
+
+Data Persistance
+----------------
+Mount your data folder to `/webapps/rainloop/data`.
+
+
+docker-compose example config:
+------------------------------
+
+	webmail:
+	  image: "krishath/rainloop-ssl"
+	  volumes:
+	   - ./webmail/ssl:/etc/ssl
+	   - ./webmail/data:/webapps/rainloop/data
+	  ports:
+	    - "9000:443"
+
 
 License
 -------
