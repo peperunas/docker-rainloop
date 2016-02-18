@@ -11,7 +11,7 @@ How to use
 
 Open your browser and visit 
 	
-	http://127.0.0.1:443
+	https://127.0.0.1
 
 SSL
 ---
