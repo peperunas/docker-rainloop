@@ -1,3 +1,5 @@
+[![](https://badge.imagelayers.io/krishath/rainloop-ssl:latest.svg)](https://imagelayers.io/?images=krishath/rainloop-ssl:latest 'Get your own badge on imagelayers.io')
+
 Docker Rainloop
 =============
 
