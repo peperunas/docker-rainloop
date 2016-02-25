@@ -30,9 +30,11 @@ VOLUME /webapps/rainloop/data
 # Based on https://github.com/mingfang/docker-salt
 RUN mkdir /etc/service
 RUN for dir in /docker/services/*;\
-    do echo $dir; chmod +x $dir/run $dir/log/run;\
+    do echo $dir; chmod +x $dir/run;\
     ln -sf $dir /etc/service/; done
 
+# fixing error 202 rainloop "data writable"
+RUN chown www-data:www-data /webapps/rainloop/data
 CMD /etc/service/nginx/run && /etc/service/php5-fpm/run
 # Expose services
 EXPOSE 443 

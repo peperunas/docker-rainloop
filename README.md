@@ -1,3 +1,5 @@
+[![](https://badge.imagelayers.io/krishath/rainloop-ssl:latest.svg)](https://imagelayers.io/?images=krishath/rainloop-ssl:latest 'Get your own badge on imagelayers.io')
+
 Docker Rainloop
 =============
 
@@ -11,12 +13,29 @@ How to use
 
 Open your browser and visit 
 	
-	http://127.0.0.1:443
+	https://127.0.0.1
 
 SSL
------------
+---
 Mount your host folder containing your cert && key to `/etc/ssl`.
 Name (or link) them as `cert.key` and `cert.pem`.
+
+Data Persistance
+----------------
+Mount your data folder to `/webapps/rainloop/data`.
+
+
+docker-compose example config:
+------------------------------
+
+	webmail:
+	  image: "krishath/rainloop-ssl"
+	  volumes:
+	   - ./webmail/ssl:/etc/ssl
+	   - ./webmail/data:/webapps/rainloop/data
+	  ports:
+	    - "9000:443"
+
 
 License
 -------
