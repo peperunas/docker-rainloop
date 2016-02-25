@@ -24,6 +24,7 @@ RUN mkdir -p /webapps/rainloop /webapps/logs/rainloop && \
 	ln -s /etc/nginx/sites-available/rainloop.conf /etc/nginx/sites-enabled/rainloop.conf && \
 	sed -i 's/;daemonize = yes/daemonize = no/g' /etc/php5/fpm/php-fpm.conf
 
+VOLUME /webapps/rainloop/data
 
 ## "Configure services"
 # Based on https://github.com/mingfang/docker-salt
