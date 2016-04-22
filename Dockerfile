@@ -14,7 +14,7 @@ ADD . /docker
 
 RUN mkdir -p /webapps/rainloop /webapps/logs/rainloop && \
 	cd /tmp && \
-	curl -R -L -O "http://repository.rainloop.net/v1/rainloop-latest.zip" && \
+	curl -R -L -O "http://repository.rainloop.net/v2/webmail/rainloop-latest.zip" && \
 	unzip rainloop-latest.zip -d /webapps/rainloop && \
 	find /webapps/rainloop -type d -exec chmod 755 {} \; && \
 	find /webapps/rainloop -type f -exec chmod 644 {} \; && \
