@@ -1,6 +1,6 @@
 FROM ahmet2mir/debian:wheezy
 
-MAINTAINER Giulio De Pasquale <me@krishath.it>
+MAINTAINER Giulio De Pasquale <me@giugl.io>
 
 ENV RELEASE wheezy
 ENV DEBIAN_FRONTEND noninteractive
@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y nginx php5-fpm php5-curl php5-sqlite ph
 # Adding files
 ADD . /docker
 
-RUN mkdir -p /webapps/rainloop /webapps/logs/rainloop && \
+CMD mkdir -p /webapps/rainloop /webapps/logs/rainloop && \
 	cd /tmp && \
 	curl -R -L -O "http://repository.rainloop.net/v2/webmail/rainloop-latest.zip" && \
 	unzip rainloop-latest.zip -d /webapps/rainloop && \
