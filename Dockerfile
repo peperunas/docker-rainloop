@@ -1,18 +1,19 @@
-FROM ahmet2mir/debian:wheezy
+FROM debian:8.5
 
 MAINTAINER Giulio De Pasquale <me@giugl.io>
 
-ENV RELEASE wheezy
+ENV RELEASE jessie
 ENV DEBIAN_FRONTEND noninteractive
 ENV SHELL /bin/bash
 
 # Curl extension
-RUN apt-get update && apt-get install -y nginx php5-fpm php5-curl php5-sqlite php5-json unzip
+RUN apt-get update && apt-get install -y curl nginx php5-fpm php5-curl php5-sqlite php5-json unzip
 
 # Adding files
 ADD . /docker
 
-CMD mkdir -p /webapps/rainloop /webapps/logs/rainloop && \
+RUN ls /docker
+RUN mkdir -p /webapps/rainloop /webapps/logs/rainloop && \
 	cd /tmp && \
 	curl -R -L -O "http://repository.rainloop.net/v2/webmail/rainloop-latest.zip" && \
 	unzip rainloop-latest.zip -d /webapps/rainloop && \
@@ -28,11 +29,11 @@ VOLUME /webapps/rainloop/data
 
 ## "Configure services"
 # Based on https://github.com/mingfang/docker-salt
-RUN mkdir /etc/service
-RUN for dir in /docker/services/*;\
-    do echo $dir; chmod +x $dir/run;\
-    ln -sf $dir /etc/service/; done
+RUN mkdir /etc/service && \
+	for dir in /docker/services/*;\
+	    do echo $dir; chmod +x $dir/run;\
+    	ln -sf $dir /etc/service/; done
 
-CMD /etc/service/nginx/run && /etc/service/php5-fpm/run
+ENTRYPOINT /etc/service/nginx/run && /etc/service/php5-fpm/run
 # Expose services
 EXPOSE 443 
