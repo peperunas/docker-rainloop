@@ -21,7 +21,7 @@ RUN mkdir -p /webapps/rainloop /webapps/logs/rainloop && \
 	cp -f /docker/assets/conf/nginx.conf /etc/nginx/nginx.conf &&  \
 	cp -f /docker/assets/conf/nginx-rainloop.conf /etc/nginx/sites-available/rainloop.conf &&  \
 	ln -s /etc/nginx/sites-available/rainloop.conf /etc/nginx/sites-enabled/rainloop.conf && \
-	sed -i 's/;daemonize = yes/daemonize = no/g' /etc/php5/fpm/php-fpm.conf && \
+	sed -i 's/;daemonize = yes/daemonize = no/g' /etc/php5/fpm/php-fpm.conf 
 
 VOLUME /webapps/rainloop/data
 
