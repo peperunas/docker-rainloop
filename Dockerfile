@@ -6,8 +6,7 @@ ENV RELEASE jessie
 ENV DEBIAN_FRONTEND noninteractive
 ENV SHELL /bin/bash
 
-# Curl extension
-RUN apt-get update && apt-get install -y curl nginx php5-fpm php5-curl php5-sqlite php5-json unzip
+RUN apt-get update && apt-get install -y curl openssl nginx php5-fpm php5-curl php5-sqlite php5-json unzip
 
 # Adding files
 ADD . /docker
